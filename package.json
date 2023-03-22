@@ -1,0 +1,24 @@
+{
+  "name": "bark-at-airbnb-backend",
+  "version": "1.0.0",
+  "description": "An API that crosses over NYC airbnb and dog park data to provide an extensive list of dog parks in the close vicinity of every airbnb in NYC.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suchethao/Bark-at-airbnb-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Suchethao/Bark-at-airbnb-backend/issues"
+  },
+  "homepage": "https://github.com/Suchethao/Bark-at-airbnb-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.2"
+  }
+}
