@@ -23,6 +23,8 @@ const airbnbSchema = new mongoose.Schema(
     neighbourhood:String,
     neighbourhood_cleansed:String,
     neighbourhood_group_cleansed:String,
-    city:String
+    city:String,
+    price: Number,
+    review_scores_rating:Number
  })
 export default mongoose.model('Airbnb', airbnbSchema);
