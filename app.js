@@ -88,6 +88,6 @@ mongoose.connect(
     "mongodb://localhost:27017/realestate"
 );
 
-app.listen(3000, () => {
+app.listen(6000, () => {
     console.log('running on port 6000')
 })
