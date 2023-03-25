@@ -31,9 +31,9 @@ app.get('/airbnb', async(req, res) => {
 app.get('/airbnb/:id', async(req, res) => {
     try {
         console.log(req.params)
-        const airbnbById = await Airbnb.findById(req.params.id).lean() // lean allows to modify a Mongoose returned document, or else its immutable
+        const airbnbById = await Airbnb.findById(req.params.Id).lean() // lean allows to modify a Mongoose returned document, or else its immutable
         const airBnbLocation = airbnbById.neighbourhood_group
-        const dogParks = await DogPark.find({"neighbourhood" : airBnbLocation})
+        const dogParks = await DogPark.find({"Neighbourhood Group Cleansed" : airBnbLocation})
         airbnbById['dogParks'] = dogParks
 
         res.json(airbnbById)
@@ -57,7 +57,7 @@ app.get('/airbnb/name/:name', async(req, res) => {
             {  // Use result from first stage of pipeline to lookup the Dogpark collection with conditions
                 "$lookup": {
                     from: "dogparks",
-                    localField: "neighbourhood_group",
+                    localField: "Neighbourhood Group Cleansed",
                     foreignField: "neighbourhood",
                     as: "dogParks"
                 }
