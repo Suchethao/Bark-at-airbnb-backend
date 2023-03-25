@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import Dogpark from '../models/DogParkSchema.js'
 import Airbnb from '../models/AirbnbSchema.js' 
 import dogparkdata from './dogpark.json' assert { type: "json" }
-import airbnbData from'./NewAirbnb.json' assert { type: "json" }
+import airbnbData from'./Newairbnb.json' assert { type: "json" }
 
 mongoose.connect('mongodb://127.0.0.1:27017/realestate', { useNewUrlParser: true }).then(
     () => {

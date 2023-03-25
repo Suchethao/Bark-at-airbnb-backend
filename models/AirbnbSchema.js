@@ -13,7 +13,7 @@ const airbnbSchema = new mongoose.Schema({
   },
   xl_picture_url: {
     type: String,
-    required: true,
+    // required: true,
   },
   street: String,
   neighbourhood: String,
