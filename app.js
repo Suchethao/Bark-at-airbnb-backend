@@ -3,11 +3,24 @@ import express from "express";
 import Airbnb from "./models/AirbnbSchema.js";
 import DogPark from "./models/DogParkSchema.js";
 import mongoose from "mongoose";
+import airbnbData from'./db/NewAirbnb.json' assert { type: "json" }
 import cors from 'cors';
 const app = express();
 const router = express.Router();
 
+// Assume you have an array of objects called `listings`
+for (let i = 0; i < airbnbData.length; i++) {
+    const airbnb = airbnbData[i];
+    if (!airbnbData.xl_picture_url) {
+      // If `xl_picture_url` is falsy, skip to the next object
+      continue;
+    }
+  
+    // Process the object if `xl_picture_url` is present
+    // ...
+  }
 
+  
 app.use(express.json());
 
 //GET all airBnb
@@ -90,5 +103,5 @@ mongoose.connect(
 );
 
 app.listen(3001, () => {
-    console.log('running on port 6000')
+    console.log('running on port 3001')
 })
