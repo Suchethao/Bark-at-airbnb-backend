@@ -22,6 +22,8 @@ for (let i = 0; i < airbnbData.length; i++) {
 
   
 app.use(express.json());
+app.use(cors());
+
 
 //GET all airBnb
 
