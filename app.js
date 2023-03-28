@@ -8,19 +8,28 @@ import cors from 'cors';
 const app = express();
 const router = express.Router();
 
-// Assume you have an array of objects called `listings`
-for (let i = 0; i < airbnbData.length; i++) {
-    const airbnb = airbnbData[i];
-    if (!airbnbData.xl_picture_url) {
-      // If `xl_picture_url` is falsy, skip to the next object
-      continue;
-    }
+// // Assume you have an array of objects called `listings`
+// for (let i = 0; i < airbnbData.length; i++) {
+//     const airbnb = airbnbData[i];
+//     if (!airbnbData.xl_picture_url) {
+//       // If `xl_picture_url` is falsy, skip to the next object
+//       continue;
+//     }
   
-    // Process the object if `xl_picture_url` is present
-    // ...
-  }
+//     // Process the object if `xl_picture_url` is present
+//     // ...
+//   }
 
-  
+// Assume you have an array of objects called listings
+// for (let i = 0; i < listings.length; i++) {
+//     const listing = listings[i];
+//     if (listing.xl_picture_url === "null") {
+//     // If xl_picture_url is "null", skip to the next object
+//     continue;
+//     }}
+//     // Your code for processing the object goes here
+    
+
 app.use(express.json());
 app.use(cors());
 
@@ -44,20 +53,20 @@ app.get('/airbnb', async(req, res) => {
 // Add the dogPark array to the Airbnb result
 
 
-// app.get('/airbnb/:id', async(req, res) => {
-//     try {
-//         console.log(req.params)
-//         const airbnbById = await Airbnb.findById(req.params.Id).lean() // lean allows to modify a Mongoose returned document, or else its immutable
-//         const airBnbLocation = airbnbById.neighbourhood_group
-//         const dogParks = await DogPark.find({"Neighbourhood Group Cleansed" : airBnbLocation})
-//         airbnbById['dogParks'] = dogParks
+app.get('/airbnb/:id', async(req, res) => {
+    try {
+        console.log(req.params)
+        const airbnbById = await Airbnb.findById(req.params.id).lean() // lean allows to modify a Mongoose returned document, or else its immutable
+        const airBnbLocation = airbnbById.neighbourhood_group_cleansed
+        const dogParks = await DogPark.find({"Neighbourhood Group Cleansed" : airBnbLocation})
+        airbnbById['dogParks'] = dogParks
 
-//         res.json(airbnbById)
-//     } catch(err) {
-//         console.log("Unexpected Error occurred", err)
-//         res.json(err)
-//     }
-// })
+        res.json(airbnbById)
+    } catch(err) {
+        console.log("Unexpected Error occurred", err)
+        res.json(err)
+    }
+})
 
 
 // Option 2: If filtering based on certain parameter like Name and then matching Dogpark location, we can use
