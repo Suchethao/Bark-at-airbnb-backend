@@ -14,7 +14,7 @@ const params = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 }
 
-export default function () {
+export function passportFunction() {
   let strategy = new Strategy(params, (payload, callback) => {
     let user = User.findById(payload.id) || null
     if (user) {

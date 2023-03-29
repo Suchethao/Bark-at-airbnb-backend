@@ -1,44 +1,34 @@
 import express from 'express';
 import jwt from 'jwt-simple';
-import passport from './config/passport.js';
-import config from './config/config.js';
+import {passportFunction} from './config/passport.js';
+import {jwtSecret, jwtSession} from '../config/config.js';
 import User from '../models/userSchema.js';
-const router = Router();
-const user = model('User');
 
-router.post('/signup', (req, res) => {
-    if (req.body.email && req.body.password) {
-      let newUser = {
-        email: req.body.email,
-        password: req.body.password
-      }
-      user.findOne({ email: req.body.email })
-        .then((user) => {
-          if (!user) {
-            user.create(newUser)
-              .then(user => {
-                if (user) {
-                  var payload = {
-                    id: newUser.id
-                  }
-                  var token = jwt.encode(payload, config.jwtSecret)
-                  res.json({
-                    token: token
-                  })
-                } else {
-                  res.sendStatus(401)
-                }
-              })
-          } else {
-            res.sendStatus(401)
+const userController = {
+login: (req, res) => {
+  if (req.body.email && req.body.password) {
+    User.findOne({email: req.body.email}).then(user) => {
+      if (user) {
+        if (user.password === req.body.password) {
+          var payload = {
+            id: user.id,
+          };
+          var token = jwt.encode(payload, jwtSecret);
+          res.json({
+            token: token,
+          });
+        } else {
+          console.log("wrong email or password");
+          res.sendStatus(401);
           }
-        })
-    } else {
-      res.sendStatus(401)
+        } else {
+          console.log ("user does not exist");
+          res.sendStatus(401);
+        }
+      }
     }
-  })
-  
-
-
-export default router
+  }
+}
+    
+export default userController
 
