@@ -1,11 +1,12 @@
-import { use, initialize as _initialize, authenticate as _authenticate } from 'passport'
-import { ExtractJwt as _ExtractJwt, Strategy as _Strategy } from 'passport-jwt'
-const ExtractJwt = _ExtractJwt
-const Strategy = _Strategy
+import passport from "passport";
+import passportJWT, {ExtractJwt} from "passport-jwt";
+import { jwtSecret } from "./config.js";
+import { model } from '../models/userSchema.js';
+import mongoose from "../db/connection.js";
 
-import { jwtSecret } from './config'
+const ExtractJwt = passportJWT.ExtractJwt;
+const Strategy = passportJWT.Strategy;
 
-import { model } from '../models/User'
 const User = model('User')
 
 const params = {
@@ -23,7 +24,7 @@ export default function () {
     }
   })
 
-  use(strategy)
+  passport.use(strategy)
 
   return {
     initialize: function () {

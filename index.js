@@ -1,5 +1,7 @@
-const passport = require('./config/passport')()
-app.use(passport.initialize())
+import passport from "./config/passport.js";
+import express from "express";
+import router from "./routes/index.js";
 
-import userController from './controllers/users.js'
-app.use('/users', userController)
+const app = express();
+app.use(passport.initialize());
+app.use('/users, userController');
