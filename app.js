@@ -59,7 +59,7 @@ app.get('/airbnb/:id', async(req, res) => {
         console.log(req.params)
         const airbnbById = await Airbnb.findById(req.params.id).lean() // lean allows to modify a Mongoose returned document, or else its immutable
         const airBnbLocation = airbnbById.neighbourhood_group_cleansed
-        const dogParks = await DogPark.find({"neighbourhood" : airBnbLocation})
+        const dogParks = await DogPark.find({"neighborhood" : airBnbLocation})
         airbnbById['dogParks'] = dogParks
 
         res.json(airbnbById)
@@ -84,7 +84,7 @@ app.get('/airbnb/name/:name', async(req, res) => {
                 "$lookup": {
                     from: "dogparks",
                     localField: "neighbourhood_group_cleansed",
-                    foreignField: "neighbourhood",
+                    foreignField: "neighborhood",
                     as: "dogParks"
                 }
             }
