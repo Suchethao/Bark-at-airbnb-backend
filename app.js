@@ -3,7 +3,8 @@ import express from "express";
 import Airbnb from "./models/AirbnbSchema.js";
 import DogPark from "./models/DogParkSchema.js";
 import mongoose from "mongoose";
-import airbnbData from'./db/NewAirbnb.json' assert { type: "json" }
+import airbnbData from'./db/NewAirbnb.json' assert { type: "json" };
+import dogparkData from './db/dogpark.json' assert {type:"json"};
 import cors from 'cors';
 const app = express();
 const router = express.Router();
@@ -58,7 +59,7 @@ app.get('/airbnb/:id', async(req, res) => {
         console.log(req.params)
         const airbnbById = await Airbnb.findById(req.params.id).lean() // lean allows to modify a Mongoose returned document, or else its immutable
         const airBnbLocation = airbnbById.neighbourhood_group_cleansed
-        const dogParks = await DogPark.find({"neighborhood" : airBnbLocation})
+        const dogParks = await DogPark.find({"neighbourhood" : airBnbLocation})
         airbnbById['dogParks'] = dogParks
 
         res.json(airbnbById)
@@ -83,7 +84,7 @@ app.get('/airbnb/name/:name', async(req, res) => {
                 "$lookup": {
                     from: "dogparks",
                     localField: "neighbourhood_group_cleansed",
-                    foreignField: "neighborhood",
+                    foreignField: "neighbourhood",
                     as: "dogParks"
                 }
             }
