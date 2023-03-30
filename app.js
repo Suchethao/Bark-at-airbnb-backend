@@ -41,11 +41,25 @@ app.get('/', async (req, res) =>{
     return res.redirect('/airbnb')
     // return res.json({ message: "Hello, World ✌️" });
 })
-app.get('/airbnb', async(req, res) => {
-    let allAirbnb = await Airbnb.find({})
-    res.json(allAirbnb)
 
-})
+app.get('/airbnb', async (req, res) => {
+    try {
+      const allAirbnb = await Airbnb.find({}).lean();
+      const airBnbLocations = allAirbnb.map((listing) => listing.neighbourhood_group_cleansed);
+  
+      const dogParks = await DogPark.find({ neighborhood: { $in: airBnbLocations } }).lean();
+  
+      const listingsWithDogParks = allAirbnb.map((listing) => {
+        const listingDogParks = dogParks.filter((park) => park.neighborhood === listing.neighbourhood_group_cleansed);
+        return { ...listing, dogParks: listingDogParks };
+      });
+  
+      res.json(listingsWithDogParks);
+    } catch (err) {
+      console.error("Unexpected error occurred", err);
+      res.json(err);
+    }
+  });
 
 //Option 1: 
 // use ID from Request and get the document from AirBnb collection
