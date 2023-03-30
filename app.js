@@ -58,7 +58,7 @@ app.get('/airbnb/:id', async(req, res) => {
         console.log(req.params)
         const airbnbById = await Airbnb.findById(req.params.id).lean() // lean allows to modify a Mongoose returned document, or else its immutable
         const airBnbLocation = airbnbById.neighbourhood_group_cleansed
-        const dogParks = await DogPark.find({"Neighbourhood Group Cleansed" : airBnbLocation})
+        const dogParks = await DogPark.find({"neighborhood" : airBnbLocation})
         airbnbById['dogParks'] = dogParks
 
         res.json(airbnbById)
@@ -71,7 +71,7 @@ app.get('/airbnb/:id', async(req, res) => {
 
 // Option 2: If filtering based on certain parameter like Name and then matching Dogpark location, we can use
 // the concept of joins (MongoDB Aggregation)
-app.get('/airbnb/:name', async(req, res) => {
+app.get('/airbnb/name/:name', async(req, res) => {
     try {
         console.log(req.params.name)
         const airbnbs = await Airbnb.aggregate([
@@ -82,8 +82,8 @@ app.get('/airbnb/:name', async(req, res) => {
             {  // Use result from first stage of pipeline to lookup the Dogpark collection with conditions
                 "$lookup": {
                     from: "dogparks",
-                    localField: "Neighbourhood Group Cleansed",
-                    foreignField: "neighbourhood",
+                    localField: "neighbourhood_group_cleansed",
+                    foreignField: "neighborhood",
                     as: "dogParks"
                 }
             }
@@ -95,6 +95,7 @@ app.get('/airbnb/:name', async(req, res) => {
     }
 
 })
+
 
 app.post('/airbnb', async(req, res) => {
     const airbnb = await Airbnb.create(req.body)
