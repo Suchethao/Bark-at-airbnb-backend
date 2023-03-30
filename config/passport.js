@@ -1,5 +1,5 @@
 import passport from "passport";
-import passportJWT, {ExtractJwt} from "passport-jwt";
+import passportJWT from "passport-jwt";
 import { jwtSecret } from "./config.js";
 import { model } from '../models/userSchema.js';
 import mongoose from "../db/connection.js";
@@ -14,15 +14,24 @@ const params = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 }
 
+async function findUserById(id) {
+  try {
+    return await User.findById(id);
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
 export function passportFunction() {
-  let strategy = new Strategy(params, (payload, callback) => {
-    let user = User.findById(payload.id) || null
+  let strategy = new Strategy(params, async (payload, callback) => {
+    let user = await findUserById(payload.id);
     if (user) {
-      return callback(null, { id: user.id })
+      return callback(null, { id: user.id });
     } else {
-      return callback(new Error('User not found'), null)
+      return callback(new Error('User not found'), null);
     }
-  })
+  });
 
   passport.use(strategy)
 
