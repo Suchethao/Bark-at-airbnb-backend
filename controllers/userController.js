@@ -17,7 +17,7 @@ const userController = {
           .then((user) => {
             if (user) {
               var payload = {
-                id: newUser.id,
+                id: user.id,
               };
               var token = jwt.encode(payload, jwtSecret);
               res.json({
@@ -33,29 +33,30 @@ const userController = {
     }
   },
   login: (req, res) => {
-  if (req.body.email && req.body.password) {
-    User.findOne({email: req.body.email}).then(user) => {
-      if (user) {
-        if (user.password === req.body.password) {
-          var payload = {
-            id: user.id,
-          };
-          var token = jwt.encode(payload, jwtSecret);
-          res.json({
-            token: token,
-          });
-        } else {
-          console.log("wrong email or password");
-          res.sendStatus(401);
+    if (req.body.email && req.body.password) {
+      User.findOne({email: req.body.email}).then((user) => {
+        if (user) {
+          if (user.password === req.body.password) {
+            var payload = {
+              id: user.id,
+            };
+            var token = jwt.encode(payload, jwtSecret);
+            res.json({
+              token: token,
+            });
+          } else {
+            console.log("wrong email or password");
+            res.sendStatus(401);
           }
         } else {
-          console.log ("user does not exist");
+          console.log("user does not exist");
           res.sendStatus(401);
         }
-      }
+      });
     }
   }
-}
+};
     
 export default userController;
+
 
