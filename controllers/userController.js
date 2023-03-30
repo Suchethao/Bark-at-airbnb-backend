@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jwt-simple';
-import {passportFunction} from './config/passport.js';
+import {passportFunction} from '../config/passport.js';
 import {jwtSecret, jwtSession} from '../config/config.js';
 import User from '../models/userSchema.js';
 

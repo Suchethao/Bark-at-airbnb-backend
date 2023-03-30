@@ -1,13 +1,12 @@
 import passport from "passport";
 import passportJWT from "passport-jwt";
 import { jwtSecret } from "./config.js";
-import { model } from '../models/userSchema.js';
+import User from '../models/userSchema.js';
 import mongoose from "../db/connection.js";
 
 const ExtractJwt = passportJWT.ExtractJwt;
 const Strategy = passportJWT.Strategy;
 
-const User = model('User')
 
 const params = {
   secretOrKey: jwtSecret,

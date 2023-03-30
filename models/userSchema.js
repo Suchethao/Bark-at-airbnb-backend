@@ -1,10 +1,9 @@
-import mongoose, { Schema, model } from '../db/connection.js'
+import mongoose from '../db/connection.js'
 
-const UserSchema = new Schema({
-	email: String,
-	password: String
+const Schema = mongoose.Schema;
+const User = new Schema({
+  email: String,
+  password: String
 })
 
-model('User', UserSchema)
-
-export default mongoose
+export default mongoose.model ("User", User)
