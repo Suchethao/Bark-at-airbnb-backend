@@ -11,9 +11,9 @@ const userController = {
         email: req.body.email,
         password: req.body.password,
       };
-      User.findOne({email: req.body.email}).then(user) => {
-        if (user) {
-          User.createConnection(newUser)
+      User.findOne({email: req.body.email}).then((user) => {
+        if (!user) {
+          User.create(newUser)
           .then((user) => {
             if (user) {
               var payload = {
@@ -29,7 +29,7 @@ const userController = {
             }
           });
         }
-      }
+      });
     }
   },
   login: (req, res) => {
