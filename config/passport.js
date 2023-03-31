@@ -36,7 +36,7 @@ export function passportFunction() {
 
   return {
     initialize: function () {
-      return _initialize()
+      return passport.initialize();
     },
     authenticate: function () {
       return _authenticate('jwt', { session: false })
