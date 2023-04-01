@@ -610,26 +610,6 @@
     "": ""
   },
   {
-    "Prop_ID": "",
-    "Name": "",
-    "neighborhood": "Brooklyn",
-    "Address": "",
-    "DogRuns_Type": "",
-    "Accessible": "",
-    "Notes": "",
-    "": ""
-  },
-  {
-    "Prop_ID": "More information.",
-    "Name": "",
-    "neighborhood": "Brooklyn",
-    "Address": "",
-    "DogRuns_Type": "",
-    "Accessible": "",
-    "Notes": "",
-    "": ""
-  },
-  {
     "Prop_ID": "M019",
     "Name": "Coleman Oval Park Dog Run",
     "neighborhood": "Manhattan",
@@ -1397,16 +1377,6 @@
     "DogRuns_Type": "Run",
     "Accessible": "N",
     "Notes": null,
-    "": ""
-  },
-  {
-    "Prop_ID": "\u0000",
-    "Name": "",
-    "neighborhood": "",
-    "Address": "",
-    "DogRuns_Type": "",
-    "Accessible": "",
-    "Notes": "",
     "": ""
   }
 ]
