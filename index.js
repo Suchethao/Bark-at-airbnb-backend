@@ -8,7 +8,7 @@ const app = express();
 const passport = passportFunction();
 app.use(express.json());
 const corsOptions ={
-    origin:'http://localhost:3001', 
+    origin:'http://localhost:3001/airbnb', 
     credentials:true,
     optionSuccessStatus:200
 }
