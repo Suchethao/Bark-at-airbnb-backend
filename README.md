@@ -66,4 +66,3 @@ Highlight: Developing a search bar (similar to the original airbnb site), that a
 ![JAVASCRIPT badge](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 ![NODE JS badge](   https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![MONGODB badge](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-- Mongoose
