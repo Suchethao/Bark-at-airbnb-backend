@@ -1,13 +1,14 @@
-
+import { passportFunction } from "./config/passport.js";
 import express from "express";
 import Airbnb from "./models/AirbnbSchema.js";
 import DogPark from "./models/DogParkSchema.js";
-import mongoose from "mongoose";
+import mongoose from "./db/connection.js";
 import airbnbData from'./db/NewAirbnb.json' assert { type: "json" };
 import dogparkData from './db/dogpark.json' assert {type:"json"};
 import cors from 'cors';
+import userRouter from "./Routes/userRouter.js";
+
 const app = express();
-const router = express.Router();
 
 // // Assume you have an array of objects called `listings`
 // for (let i = 0; i < airbnbData.length; i++) {
@@ -32,7 +33,16 @@ const router = express.Router();
     
 
 app.use(express.json());
-app.use(cors());
+const passport = passportFunction();
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+app.use(passport.initialize());
+app.use("/users", userRouter);
+
 
 
 //GET all airBnb
@@ -125,9 +135,6 @@ app.get('/dogparks', async(req, res) =>  {
 })
 
 
-mongoose.connect(
-    "mongodb://localhost:27017/realestate"
-);
 
 app.listen(3001, () => {
     console.log('running on port 3001')
