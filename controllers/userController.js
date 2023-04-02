@@ -16,6 +16,7 @@ const userController = {
           User.create(newUser)
           .then((user) => {
             if (user) {
+              console.log("user", user)
               var payload = {
                 id: user.id,
               };
@@ -28,6 +29,11 @@ const userController = {
               res.sendStatus(401);
             }
           });
+        }
+        else {
+          res.json({
+            message: "user already exists"
+          })
         }
       });
     }
