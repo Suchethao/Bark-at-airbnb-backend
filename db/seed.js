@@ -1,5 +1,5 @@
 import {assert} from 'console'
-import mongoose from '/connection.js'
+import mongoose from './connection.js'
 import Dogpark from '../models/DogParkSchema.js'
 import Airbnb from '../models/AirbnbSchema.js' 
 import dogparkdata from './dogpark.json' assert { type: "json" }
