@@ -25,7 +25,7 @@ Highlight: Developing a search bar (similar to the original airbnb site), that a
 ```
 5. **Open in browser**
     - Open [http://localhost:3000/airbnb](http://localhost:3000/airbnb) to view it in your browser.
-## Front-end Installation instructions
+## Back-end Installation instructions
 1. **Clone the repo**
 ```
     -> Git clone
