@@ -1,15 +1,10 @@
 import {assert} from 'console'
-import mongoose from 'mongoose'
+import mongoose from './connection.js'
 import Dogpark from '../models/DogParkSchema.js'
 import Airbnb from '../models/AirbnbSchema.js' 
 import dogparkdata from './dogpark.json' assert { type: "json" }
 import airbnbData from'./Newairbnb.json' assert { type: "json" }
 
-mongoose.connect('mongodb://127.0.0.1:27017/realestate', { useNewUrlParser: true }).then(
-    () => {
-      console.log("Database successfully connected");
-    }
-)
 // // Assume you have an array of objects called listings
 // for (let i = 0; i < airbnbData.length; i++) {
 //   const listing = airbnbData[i];
